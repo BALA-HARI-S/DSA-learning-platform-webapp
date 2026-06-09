@@ -1,0 +1,303 @@
+/* ===== AlgoArcade: course content (14 topics) ===== */
+/* Each topic: learn content + a quiz "boss". The `play` key selects an interactive game. */
+
+var TOPICS = [
+  {
+    id: 'complexity', n: 1, name: 'Big-O Basics', icon: '⏱️', color: '#2ce6e6',
+    tag: 'How work grows with n', play: 'complexity',
+    learn: {
+      summary: 'Complexity describes how the number of operations (time) or extra memory (space) grows as input size n grows — not actual seconds.',
+      bullets: [
+        'Drop constants and lower-order terms: 5n² + 100n + 20 → O(n²).',
+        'Separate loops add (O(n)+O(n)=O(n)); nested loops multiply (O(n·n)=O(n²)).',
+        'Halving the input each step → O(log n). Branching recursion → often O(2ⁿ).',
+        'Keep only the dominant term — it wins as n gets large.',
+      ],
+      complexity: [['Single statement', 'O(1)'], ['One loop', 'O(n)'], ['Nested loops', 'O(n²)'], ['Halving', 'O(log n)'], ['Efficient sort', 'O(n log n)']],
+    },
+    quiz: [
+      { q: 'Two separate (non-nested) loops over n elements:', opts: ['O(n²)', 'O(n)', 'O(2n) and that is final', 'O(log n)'], a: 1, explain: 'n + n = 2n, and Big-O drops the constant → O(n).' },
+      { q: 'Repeatedly dividing n by 2 until it reaches 1 is:', opts: ['O(n)', 'O(n²)', 'O(log n)', 'O(1)'], a: 2, explain: 'Halving gives a logarithmic number of steps — the basis of binary search.' },
+      { q: 'T(n) = 5n² + 100n + 20 simplifies to:', opts: ['O(n²)', 'O(5n²)', 'O(100n)', 'O(n)'], a: 0, explain: 'Drop constants and lower-order terms; n² dominates.' },
+      { q: 'A loop nested inside another loop, both over n:', opts: ['O(n)', 'O(n log n)', 'O(n²)', 'O(2n)'], a: 2, explain: 'Nested loops multiply: n × n = n².' },
+    ],
+  },
+  {
+    id: 'arrays', n: 2, name: 'Arrays', icon: '▦', color: '#7cff5b',
+    tag: 'Two pointers & windows', play: 'array',
+    learn: {
+      summary: 'A contiguous block giving O(1) random access. Fast to read anywhere, slow to insert/delete in the middle (shifting).',
+      bullets: [
+        'Access by index: O(1). Search unsorted: O(n). Middle insert/delete: O(n).',
+        'Two pointers: walk from both ends (reverse, pair sums) — O(n), O(1) space.',
+        'Sliding window: keep a running aggregate of a contiguous range — O(n) not O(n·k).',
+        'A HashMap can replace an inner loop, turning O(n²) into O(n) (two-sum).',
+      ],
+      complexity: [['Index access', 'O(1)'], ['Linear scan', 'O(n)'], ['Two pointers', 'O(n)'], ['Sliding window', 'O(n)']],
+      code: 'int left = 0, right = arr.length - 1;\nwhile (left < right) {\n  swap(arr, left++, right--); // reverse in place\n}',
+    },
+    quiz: [
+      { q: 'Accessing arr[i] by index is:', opts: ['O(n)', 'O(1)', 'O(log n)', 'O(n²)'], a: 1, explain: 'Address = base + i·size — one arithmetic step.' },
+      { q: 'Best technique for "max sum of any window of size k":', opts: ['Brute force pairs', 'Sliding window', 'Binary search', 'Recursion'], a: 1, explain: 'Slide the window, adding the entering and subtracting the leaving element: O(n).' },
+      { q: 'Inserting at the FRONT of an ArrayList of size n, repeated n times:', opts: ['O(n)', 'O(n log n)', 'O(n²)', 'O(1)'], a: 2, explain: 'Each front insert shifts all elements (O(n)), done n times → O(n²). Prefer ArrayDeque.' },
+      { q: 'Two-sum with a HashMap is:', opts: ['O(n²) time', 'O(n) time / O(n) space', 'O(1) space', 'O(log n) time'], a: 1, explain: 'One pass; ask "have I seen target - current?" in O(1) avg, storing seen values.' },
+    ],
+  },
+  {
+    id: 'strings', n: 3, name: 'Strings', icon: '✎', color: '#ffc34d',
+    tag: 'Immutability & patterns', play: 'strings',
+    learn: {
+      summary: 'A String is an immutable char sequence. Every "edit" makes a new String — which drives the big performance traps.',
+      bullets: [
+        'Building with += in a loop is O(n²); use StringBuilder for O(n).',
+        'Palindrome: two pointers from both ends — O(n), O(1) space.',
+        'Anagram / counting: a frequency map (or int[26]) — O(n).',
+        'Longest substring without repeats: sliding window — O(n).',
+      ],
+      complexity: [['charAt(i)', 'O(1)'], ['+= in loop', 'O(n²) ⚠'], ['StringBuilder build', 'O(n)'], ['Palindrome', 'O(n)']],
+      code: 'StringBuilder sb = new StringBuilder();\nfor (char c : chars) sb.append(c); // O(n)',
+    },
+    quiz: [
+      { q: 'Building a big string with += inside a loop is:', opts: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'], a: 2, explain: 'Each += copies the whole accumulated string. Use StringBuilder → O(n).' },
+      { q: 'Checking a palindrome with two pointers costs:', opts: ['O(n) time, O(1) space', 'O(n) time, O(n) space', 'O(n²)', 'O(log n)'], a: 0, explain: 'Compare ends inward; no copy needed.' },
+      { q: 'Best way to test if two strings are anagrams:', opts: ['Compare lengths only', 'Frequency count', 'Reverse one', 'Binary search'], a: 1, explain: 'Count each character; equal counts ⇒ anagrams. O(n).' },
+      { q: '"hi" == new String("hi") evaluates to:', opts: ['true', 'false', 'compile error', 'depends on JVM'], a: 1, explain: '== compares references; new String allocates a distinct object. Use .equals for content.' },
+    ],
+  },
+  {
+    id: 'linkedlist', n: 4, name: 'Linked Lists', icon: '⛓', color: '#9d7bff',
+    tag: 'Pointers, no shifting', play: 'linkedlist',
+    learn: {
+      summary: 'Nodes scattered in memory, each pointing to the next. No O(1) index access, but O(1) insert/delete once you hold the spot.',
+      bullets: [
+        'Access by index: O(n) (walk the chain). Insert/delete at a known node: O(1).',
+        'Reverse: flip each next pointer with prev/current/next — O(n), O(1) space.',
+        'Slow/fast pointers find the middle and detect cycles (Floyd) in one pass.',
+        'In real Java, prefer ArrayList / ArrayDeque — LinkedList is rarely the right call.',
+      ],
+      complexity: [['Index access', 'O(n)'], ['Insert at head', 'O(1)'], ['Reverse', 'O(n)'], ['Find middle', 'O(n)']],
+      code: 'Node prev = null, cur = head;\nwhile (cur != null) {\n  Node next = cur.next;\n  cur.next = prev; prev = cur; cur = next;\n}',
+    },
+    quiz: [
+      { q: 'Getting the i-th element of a singly linked list is:', opts: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], a: 2, explain: 'No random access — you must walk from the head.' },
+      { q: 'To find the middle in one pass you use:', opts: ['Binary search', 'Slow/fast pointers', 'A hash map', 'Sorting'], a: 1, explain: 'Fast moves 2×; when it hits the end, slow is at the middle.' },
+      { q: 'When reversing, what must you do before rewiring cur.next?', opts: ['Nothing', 'Save cur.next first', 'Delete the node', 'Sort the list'], a: 1, explain: 'Stash next or you lose the rest of the list.' },
+      { q: 'For frequent get(i) by index, choose:', opts: ['LinkedList', 'ArrayList', 'They are equal', 'Neither'], a: 1, explain: 'ArrayList get(i) is O(1) and far more cache-friendly.' },
+    ],
+  },
+  {
+    id: 'stack', n: 5, name: 'Stacks', icon: '🥞', color: '#ff4fd8',
+    tag: 'LIFO — last in, first out', play: 'stack',
+    learn: {
+      summary: 'Last-in, first-out. Only the top is accessible. push/pop/peek are all O(1).',
+      bullets: [
+        'Perfect for nesting: balanced brackets, undo, expression parsing.',
+        'The monotonic-stack pattern solves "next greater element" in O(n).',
+        'The JVM call stack is a stack — deep recursion overflows it.',
+        'In Java use ArrayDeque as a stack, NOT the legacy java.util.Stack.',
+      ],
+      complexity: [['push / pop / peek', 'O(1)'], ['Balanced brackets', 'O(n)'], ['Next greater element', 'O(n)']],
+      code: 'Deque<Character> st = new ArrayDeque<>();\nfor (char c : s) {\n  if (open(c)) st.push(c);\n  else if (st.isEmpty() || st.pop()!=match(c)) return false;\n}',
+    },
+    quiz: [
+      { q: 'A stack follows which order?', opts: ['FIFO', 'LIFO', 'Sorted', 'Random'], a: 1, explain: 'Last in, first out.' },
+      { q: 'Best structure to validate balanced parentheses:', opts: ['Queue', 'Stack', 'Heap', 'Hash set'], a: 1, explain: 'Push openers; each closer must match the top.' },
+      { q: 'In modern Java, use a stack via:', opts: ['java.util.Stack', 'ArrayDeque', 'LinkedList only', 'PriorityQueue'], a: 1, explain: 'ArrayDeque is unsynchronized and cache-friendly; Stack is legacy.' },
+      { q: '"Next greater element" in O(n) uses a:', opts: ['Monotonic stack', 'Binary search', 'Two heaps', 'DP table'], a: 0, explain: 'Each index is pushed and popped at most once → O(n).' },
+    ],
+  },
+  {
+    id: 'queue', n: 6, name: 'Queues', icon: '🎟️', color: '#2ce6e6',
+    tag: 'FIFO — first in, first out', play: 'queue',
+    learn: {
+      summary: 'First-in, first-out. Add at the back, remove from the front. The engine behind BFS and work queues.',
+      bullets: [
+        'A circular buffer keeps enqueue/dequeue O(1) (no shifting).',
+        'A deque adds/removes at both ends — powers sliding-window maximum.',
+        'BFS uses a queue to explore level by level.',
+        'Use ArrayDeque; for threads use the java.util.concurrent blocking queues.',
+      ],
+      complexity: [['enqueue / dequeue', 'O(1)'], ['Sliding window max', 'O(n)'], ['BFS', 'O(V + E)']],
+    },
+    quiz: [
+      { q: 'A queue follows which order?', opts: ['LIFO', 'FIFO', 'Sorted', 'Random'], a: 1, explain: 'First in, first out.' },
+      { q: 'Why a circular buffer for an array queue?', opts: ['Saves memory', 'Avoids O(n) shifting on dequeue', 'Sorts items', 'Allows duplicates'], a: 1, explain: 'head/tail wrap with modulo, so neither end shifts → O(1).' },
+      { q: 'Which traversal uses a queue?', opts: ['DFS', 'BFS', 'In-order', 'Binary search'], a: 1, explain: 'BFS processes nodes in arrival order, level by level.' },
+      { q: 'Sliding-window maximum is solved with a:', opts: ['Monotonic deque', 'Stack of values', 'Binary heap only', 'Two pointers alone'], a: 0, explain: 'A decreasing deque of indices keeps the window max at the front.' },
+    ],
+  },
+  {
+    id: 'hashing', n: 7, name: 'Hashing', icon: '#️⃣', color: '#7cff5b',
+    tag: 'O(1) average lookup', play: 'hashing',
+    learn: {
+      summary: 'Map a key to a bucket via a hash function for average O(1) put/get. Collisions chain in a bucket; a high load factor triggers resize.',
+      bullets: [
+        'put/get/contains: O(1) average, O(n) worst case (all keys collide).',
+        'Load factor = entries / buckets; exceed it (0.75 in the JDK) → double + rehash.',
+        'equal objects MUST have equal hashCode — override both together.',
+        'HashMap is unordered; TreeMap is sorted (O(log n)); LinkedHashMap keeps order.',
+      ],
+      complexity: [['put / get', 'O(1) avg'], ['Worst case', 'O(n)'], ['Frequency count', 'O(n)']],
+    },
+    quiz: [
+      { q: 'Average time for HashMap get/put:', opts: ['O(log n)', 'O(1)', 'O(n)', 'O(n log n)'], a: 1, explain: 'Hash to a bucket, scan a short chain.' },
+      { q: 'If you override equals but NOT hashCode, lookups:', opts: ['Work fine', 'Often fail to find the entry', 'Throw an exception', 'Become O(log n)'], a: 1, explain: 'Different bucket on lookup than on insert — the entry seems to vanish.' },
+      { q: 'Exceeding the load factor causes the map to:', opts: ['Throw', 'Resize (double + rehash)', 'Drop entries', 'Sort keys'], a: 1, explain: 'Keeps chains short so operations stay ~O(1).' },
+      { q: 'Need keys in SORTED order with fast lookup? Use:', opts: ['HashMap', 'TreeMap', 'ArrayList', 'HashSet'], a: 1, explain: 'TreeMap is a red-black tree: O(log n), ordered.' },
+    ],
+  },
+  {
+    id: 'recursion', n: 8, name: 'Recursion', icon: '🌀', color: '#ffc34d',
+    tag: 'A method calling itself', play: 'recursion',
+    learn: {
+      summary: 'Solve a problem via smaller instances of itself. Needs a base case (stops) and a recursive case (shrinks toward it).',
+      bullets: [
+        'Each call uses a stack frame → recursion depth d costs O(d) space.',
+        'Naive Fibonacci recomputes subproblems → O(2ⁿ). Memoize → O(n).',
+        'Backtracking = choose → explore → un-choose (subsets, permutations).',
+        'Java has no tail-call optimization; deep recursion can StackOverflow.',
+      ],
+      complexity: [['factorial', 'O(n)'], ['naive Fibonacci', 'O(2ⁿ)'], ['memoized Fib', 'O(n)'], ['subsets', 'O(n·2ⁿ)']],
+      code: 'long fib(int n) {\n  if (n <= 1) return n;        // base case\n  return fib(n-1) + fib(n-2);  // branches → O(2^n)\n}',
+    },
+    quiz: [
+      { q: 'Every recursive method MUST have:', opts: ['A loop', 'A base case + a step toward it', 'An array', 'Two parameters'], a: 1, explain: 'Without a reachable base case it never terminates → StackOverflow.' },
+      { q: 'Naive recursive Fibonacci is:', opts: ['O(n)', 'O(n²)', 'O(2ⁿ)', 'O(log n)'], a: 2, explain: 'Two branches per call, recomputing overlapping subproblems.' },
+      { q: 'Memoization changes Fibonacci to:', opts: ['O(2ⁿ)', 'O(n)', 'O(n²)', 'O(1)'], a: 1, explain: 'Each subproblem is computed once and cached.' },
+      { q: 'Generating all subsets/permutations uses:', opts: ['Binary search', 'Backtracking', 'Hashing', 'Sorting'], a: 1, explain: 'choose → explore → un-choose explores the decision tree.' },
+    ],
+  },
+  {
+    id: 'sorting', n: 9, name: 'Sorting', icon: '📊', color: '#9d7bff',
+    tag: 'Order from chaos', play: 'sorting',
+    learn: {
+      summary: 'Arrange elements in order. O(n²) simple sorts vs O(n log n) divide-and-conquer sorts. Comparison sorts can\'t beat Ω(n log n).',
+      bullets: [
+        'Bubble/selection/insertion: O(n²), in place. Insertion shines on near-sorted data.',
+        'Merge sort: O(n log n) always, stable, O(n) extra space.',
+        'Quick sort: O(n log n) average (O(n²) worst), in place, not stable.',
+        'JDK: dual-pivot quicksort for primitives, stable TimSort for objects.',
+      ],
+      complexity: [['Bubble/Selection/Insertion', 'O(n²)'], ['Merge', 'O(n log n)'], ['Quick (avg)', 'O(n log n)'], ['Quick (worst)', 'O(n²)']],
+    },
+    quiz: [
+      { q: 'Merge sort\'s worst-case time is:', opts: ['O(n²)', 'O(n log n)', 'O(n)', 'O(log n)'], a: 1, explain: 'Always splits in half and merges in linear time.' },
+      { q: 'Quick sort\'s worst case (bad pivots) is:', opts: ['O(n log n)', 'O(n)', 'O(n²)', 'O(log n)'], a: 2, explain: 'Maximally unbalanced partitions; a random pivot avoids it in practice.' },
+      { q: '"Stable" sort means:', opts: ['Never crashes', 'Equal elements keep their original order', 'Uses O(1) memory', 'Is always fastest'], a: 1, explain: 'Matters when sorting by a secondary key.' },
+      { q: 'Which is great on nearly-sorted input?', opts: ['Selection sort', 'Insertion sort', 'Neither', 'Quick sort worst case'], a: 1, explain: 'Insertion sort is O(n) when the array is almost sorted.' },
+    ],
+  },
+  {
+    id: 'searching', n: 10, name: 'Searching', icon: '🔍', color: '#2ce6e6',
+    tag: 'Find it fast', play: 'searching',
+    learn: {
+      summary: 'Unsorted data → linear O(n) scan. Sorted data → binary search O(log n) by halving the range each step.',
+      bullets: [
+        'Binary search precondition: the array is sorted.',
+        'Use mid = low + (high - low) / 2 to avoid integer overflow.',
+        'Boundary variants find the first/last occurrence of duplicates.',
+        '"Binary search on the answer" works when a predicate is monotonic.',
+      ],
+      complexity: [['Linear search', 'O(n)'], ['Binary search', 'O(log n)'], ['First/last occurrence', 'O(log n)']],
+      code: 'int lo=0, hi=a.length-1;\nwhile (lo <= hi) {\n  int mid = lo + (hi-lo)/2;\n  if (a[mid]==x) return mid;\n  else if (a[mid]<x) lo=mid+1; else hi=mid-1;\n}',
+    },
+    quiz: [
+      { q: 'Binary search requires the data to be:', opts: ['Hashed', 'Sorted', 'Reversed', 'Unique'], a: 1, explain: 'It relies on discarding the half that can\'t contain the target.' },
+      { q: 'Searching 1,000,000 sorted items with binary search takes ~:', opts: ['1,000,000 steps', '~20 steps', '~1000 steps', '500,000 steps'], a: 1, explain: 'log₂(10⁶) ≈ 20.' },
+      { q: 'Why mid = low + (high-low)/2 instead of (low+high)/2?', opts: ['Faster', 'Avoids integer overflow', 'Sorts faster', 'No reason'], a: 1, explain: '(low+high) can overflow int for large indices.' },
+      { q: 'On UNSORTED data the best search is:', opts: ['Binary search', 'Linear search', 'Jump search', 'Interpolation'], a: 1, explain: 'Without order you must scan — O(n).' },
+    ],
+  },
+  {
+    id: 'trees', n: 11, name: 'Trees', icon: '🌳', color: '#7cff5b',
+    tag: 'Hierarchies & traversals', play: 'trees',
+    learn: {
+      summary: 'Nodes with up to two children, defined recursively. Traversed depth-first (pre/in/post) or breadth-first (level-order).',
+      bullets: [
+        'Pre-order: Node, L, R. In-order: L, Node, R. Post-order: L, R, Node.',
+        'In-order of a BST yields sorted values.',
+        'Level-order (BFS) uses a queue; DFS uses recursion / a stack.',
+        'All traversals are O(n); DFS depth = tree height.',
+      ],
+      complexity: [['Any traversal', 'O(n)'], ['DFS space', 'O(h)'], ['BFS space', 'O(w)']],
+    },
+    quiz: [
+      { q: 'Which DFS traversal gives sorted order for a BST?', opts: ['Pre-order', 'In-order', 'Post-order', 'Level-order'], a: 1, explain: 'Left, Node, Right visits smaller values first.' },
+      { q: 'Level-order traversal uses a:', opts: ['Stack', 'Queue', 'Heap', 'Hash map'], a: 1, explain: 'It processes nodes level by level (BFS).' },
+      { q: 'Time to visit every node once is:', opts: ['O(log n)', 'O(n)', 'O(n²)', 'O(h)'], a: 1, explain: 'Each node is touched exactly once.' },
+      { q: 'To compute a value depending on children (e.g. height), use:', opts: ['Pre-order', 'Post-order', 'Level-order', 'Binary search'], a: 1, explain: 'Post-order visits children before the parent.' },
+    ],
+  },
+  {
+    id: 'bst', n: 12, name: 'Binary Search Trees', icon: '🔺', color: '#ff4fd8',
+    tag: 'Ordered, searchable tree', play: 'bst',
+    learn: {
+      summary: 'A binary tree where left subtree < node < right subtree. Search/insert/delete are O(h) — O(log n) when balanced.',
+      bullets: [
+        'At each node, go left (smaller) or right (larger) — discard half the tree.',
+        'Inserting sorted data into a plain BST degenerates it into a list (O(n)).',
+        'Delete has three cases: leaf, one child, two children (use in-order successor).',
+        'Production code uses self-balancing trees: TreeMap/TreeSet (red-black).',
+      ],
+      complexity: [['search/insert (balanced)', 'O(log n)'], ['search/insert (degenerate)', 'O(n)'], ['in-order dump', 'O(n)']],
+    },
+    quiz: [
+      { q: 'The BST invariant says, for each node:', opts: ['left > node > right', 'left < node < right', 'all children equal', 'children are sorted lists'], a: 1, explain: 'Smaller on the left, larger on the right — recursively.' },
+      { q: 'Inserting 1,2,3,4,5 in order into a plain BST gives:', opts: ['A balanced tree', 'A list-like tree (O(n))', 'A full tree', 'An error'], a: 1, explain: 'It degenerates into a right-leaning chain — why we use balanced trees.' },
+      { q: 'Deleting a node with two children: replace it with its:', opts: ['Parent', 'In-order successor', 'Root', 'Left child always'], a: 1, explain: 'The smallest value in the right subtree preserves the invariant.' },
+      { q: 'Production-grade ordered map in Java:', opts: ['HashMap', 'TreeMap', 'ArrayList', 'A hand-rolled BST'], a: 1, explain: 'TreeMap is a self-balancing red-black tree, guaranteed O(log n).' },
+    ],
+  },
+  {
+    id: 'graphs', n: 13, name: 'Graphs', icon: '🕸️', color: '#9d7bff',
+    tag: 'Vertices & edges', play: 'graphs',
+    learn: {
+      summary: 'Vertices connected by edges (directed/undirected, weighted/not). Traversed with BFS or DFS plus a visited set.',
+      bullets: [
+        'Adjacency list: O(V+E) memory — the default for sparse graphs.',
+        'BFS finds shortest paths in an UNWEIGHTED graph (explores by distance).',
+        'DFS: reachability, cycle detection, topological sort.',
+        'A visited set is mandatory — cycles make traversal loop forever otherwise.',
+      ],
+      complexity: [['BFS / DFS', 'O(V + E)'], ['Adjacency list memory', 'O(V + E)'], ['Adjacency matrix memory', 'O(V²)']],
+    },
+    quiz: [
+      { q: 'BFS finds shortest paths when the graph is:', opts: ['Weighted', 'Unweighted', 'Directed only', 'A tree only'], a: 1, explain: 'It expands vertices in order of hop-distance from the start.' },
+      { q: 'Forgetting the visited set on a cyclic graph causes:', opts: ['Wrong sort', 'Infinite loop', 'O(1) speedup', 'Nothing'], a: 1, explain: 'The cycle re-adds seen vertices forever.' },
+      { q: 'Ordering modules by dependency uses:', opts: ['Binary search', 'Topological sort', 'BFS shortest path', 'Hashing'], a: 1, explain: 'A DAG\'s topological order lists dependencies before dependents.' },
+      { q: 'Time for BFS/DFS over a graph:', opts: ['O(V²)', 'O(V + E)', 'O(E²)', 'O(log V)'], a: 1, explain: 'Each vertex and edge is processed once.' },
+    ],
+  },
+  {
+    id: 'dp', n: 14, name: 'Dynamic Programming', icon: '🧩', color: '#ffc34d',
+    tag: 'Reuse subproblem answers', play: 'dp',
+    learn: {
+      summary: 'Break a problem into overlapping subproblems with optimal substructure, solve each once, and reuse — top-down (memo) or bottom-up (table).',
+      bullets: [
+        'Applies when subproblems OVERLAP and the optimum is built from sub-optima.',
+        'Define the state and recurrence — that is 80% of the work.',
+        'Coin change is DP; greedy can fail (coins {1,3,4}, amount 6 → 3+3 beats 4+1+1).',
+        'Climbing stairs = Fibonacci; collapse the table to O(1) space.',
+      ],
+      complexity: [['Climbing stairs', 'O(n)'], ['Coin change', 'O(amount·coins)'], ['0/1 knapsack', 'O(n·capacity)']],
+    },
+    quiz: [
+      { q: 'DP applies when a problem has:', opts: ['No structure', 'Overlapping subproblems + optimal substructure', 'Only one answer', 'Random inputs'], a: 1, explain: 'Otherwise it is plain divide-and-conquer or greedy.' },
+      { q: 'For coins {1,3,4} and amount 6, greedy vs DP:', opts: ['Both give 2', 'Greedy 3 coins, DP 2 coins', 'Both give 3', 'DP fails'], a: 1, explain: 'Greedy takes 4+1+1; DP finds 3+3.' },
+      { q: 'Climbing stairs (1 or 2 steps) has the recurrence of:', opts: ['Factorial', 'Fibonacci', 'Binary search', 'Quicksort'], a: 1, explain: 'ways(n) = ways(n-1) + ways(n-2).' },
+      { q: 'Memoization is which DP style?', opts: ['Bottom-up', 'Top-down (recurse + cache)', 'Greedy', 'Iterative only'], a: 1, explain: 'Tabulation is the bottom-up counterpart.' },
+    ],
+  },
+];
+
+// Badges: id, icon, name, desc, and a predicate over the saved state.
+var BADGES = [
+  { id: 'first', ico: '🌱', name: 'First Steps', desc: 'Clear your first level', test: (s) => completedCount(s) >= 1 },
+  { id: 'five', ico: '⚡', name: 'On a Roll', desc: 'Clear 5 levels', test: (s) => completedCount(s) >= 5 },
+  { id: 'half', ico: '🎯', name: 'Halfway Hero', desc: 'Clear 7 levels', test: (s) => completedCount(s) >= 7 },
+  { id: 'all', ico: '👑', name: 'Grandmaster', desc: 'Clear all 14 levels', test: (s) => completedCount(s) >= 14 },
+  { id: 'perfect', ico: '💎', name: 'Flawless', desc: 'Earn 3 stars on any level', test: (s) => Object.values(s.scores || {}).some((v) => v >= 100) },
+  { id: 'allstar', ico: '🌟', name: 'All-Star', desc: '3 stars on every level', test: (s) => TOPICS.every((t) => (s.scores || {})[t.id] >= 100) },
+  { id: 'xp500', ico: '🚀', name: 'XP Hunter', desc: 'Reach 500 XP', test: (s) => (s.xp || 0) >= 500 },
+];
+function completedCount(s) { return Object.keys(s.scores || {}).length; }

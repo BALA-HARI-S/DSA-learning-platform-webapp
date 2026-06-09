@@ -9,6 +9,9 @@ backend engineer. Each topic ships **two** things:
 The overarching study guide and progress tracker lives in
 [`../dsa-learning-roadmap.md`](../dsa-learning-roadmap.md).
 
+🕹️ **Want to learn by playing?** The [AlgoArcade web app](../webapp/README.md) turns all 14
+topics into an interactive game — open `../webapp/index.html` in a browser.
+
 ## How to use this course
 
 For each topic:

@@ -20,6 +20,10 @@ Lesson template: [DSA/LESSON-TEMPLATE.md](DSA/LESSON-TEMPLATE.md)
 Lessons now ship with **runnable Java + JUnit tests** under [code/](code/README.md).
 Run them all with `cd code && mvn test`.
 
+Prefer to learn by playing? Open the **[AlgoArcade web app](webapp/README.md)** — a
+game-like, interactive tour of all 14 topics (skill-tree, visualizers, quizzes, XP/badges).
+Just open `webapp/index.html` in a browser.
+
 Lesson notes:
 
 - [01 - Time and Space Complexity Java Examples](DSA/01-foundations/01-time-and-space-complexity-java-examples.md)
