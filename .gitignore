@@ -1,0 +1,16 @@
+# Build output
+target/
+*.class
+
+# IDE / editor
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local (personal) settings
+.claude/settings.local.json
