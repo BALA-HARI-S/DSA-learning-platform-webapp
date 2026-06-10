@@ -11,15 +11,15 @@ It's plain HTML/CSS/JS with **no build step**.
 
 ```bash
 # easiest — just open the file
-xdg-open webapp/index.html        # Linux
-# or: open webapp/index.html      # macOS
+xdg-open index.html        # Linux
+# or: open index.html      # macOS
 ```
 
 Everything works from `file://` (scripts are classic, non-module). If your browser is strict
 about local files, serve it statically instead:
 
 ```bash
-cd webapp && python3 -m http.server 8000
+python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
@@ -55,20 +55,19 @@ cd webapp && python3 -m http.server 8000
 ## Files
 
 ```
-webapp/
-├── index.html        # shell (loads the scripts in order)
-├── css/style.css     # neon arcade theme + animations
-└── js/
-    ├── util.js        # tiny DOM + animation helpers
-    ├── data.js        # the 14 topics: learn content + quizzes + badges
-    ├── state.js       # XP / levels / stars / badges, saved to localStorage
-    ├── quiz.js        # reusable quiz "boss" engine
-    ├── games.js       # the 14 interactive visualizers (Games registry)
-    └── app.js         # router, skill-tree map, level view, bootstrap
+index.html        # shell (loads the scripts in order)
+css/style.css     # neon arcade theme + animations
+js/
+├── util.js        # tiny DOM + animation helpers
+├── data.js        # the 14 topics: learn content + quizzes + badges
+├── state.js       # XP / levels / stars / badges, saved to localStorage
+├── quiz.js        # reusable quiz "boss" engine
+├── games.js       # the 14 interactive visualizers (Games registry)
+└── app.js         # router, skill-tree map, level view, bootstrap
 ```
 
-The content mirrors the markdown lessons under [`../DSA`](../DSA) and the runnable Java in
-[`../code`](../code). To extend a level, edit its entry in `data.js` (concept + quiz) and add
+The content mirrors the markdown lessons under [`DSA`](DSA) and the runnable Java in
+[`code`](code). To extend a level, edit its entry in `data.js` (concept + quiz) and add
 a `Games.<key>` function in `games.js`.
 
 > Pure client-side and framework-free on purpose, so it runs instantly. It could later be
