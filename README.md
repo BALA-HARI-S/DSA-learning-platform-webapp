@@ -1,9 +1,10 @@
 # AlgoArcade 🕹️
 
 A game-like, interactive web app for the DSA course in this repo. Each of the 14 topics
-becomes a **level** on a neon skill-tree: read a quick concept card, play a hands-on
-visualizer, then beat a quiz boss to earn XP, stars, and badges. Progress is saved in your
-browser (`localStorage`) — no account, no server, no internet needed.
+becomes a **level** on a neon skill-tree: read a quick concept card (with curated references &
+videos), read the **full lesson in-app**, play a hands-on visualizer, then beat a quiz boss to
+earn XP, stars, and badges. Progress is saved in your browser (`localStorage`). It's static
+files — no build, no backend.
 
 ## Run it
 
@@ -15,8 +16,9 @@ xdg-open index.html        # Linux
 # or: open index.html      # macOS
 ```
 
-Everything works from `file://` (scripts are classic, non-module). If your browser is strict
-about local files, serve it statically instead:
+The arcade runs straight from `file://` (just open the file). The **in-app course reader**
+fetches the lesson `.md` files, which browsers block on `file://` — so to read lessons inside
+the app, use **GitHub Pages** or a local server:
 
 ```bash
 python3 -m http.server 8000
@@ -25,13 +27,15 @@ python3 -m http.server 8000
 
 ## How to play
 
-1. **Map** — the 14 levels. Level 1 is open; clearing a level unlocks the next.
-2. Open a level → three tabs:
-   - **📖 Learn** — the core idea, key complexities, and a code snippet.
-   - **🎮 Play** — an interactive visualizer (see below).
+1. The top bar toggles **🎮 Arcade** (play) and **📚 Course** (read all 14 lessons in-app).
+2. **Arcade map** — all 14 levels, playable in any order (no locks).
+3. Open a level → four tabs:
+   - **📖 Learn** — core idea, complexities, and a code snippet, plus notes, curated
+     **references**, and **video** links.
+   - **📚 Read** — the full lesson, rendered live from the `DSA/*.md` files.
+   - **🎮 Play** — an interactive visualizer, with quick-reference chips back to the lesson.
    - **⚔ Challenge** — a quiz; score **60%+** to clear the level (★ at 60/80/100%).
-3. Earn **XP** (arcade levels), **stars** per topic, and **🏅 badges** for milestones.
-4. Top bar: 🏅 shows your badges, ⟲ resets all progress.
+4. Earn **XP**, **stars** per topic, and **🏅 badges**. Top bar: 🏅 badges, ⟲ reset progress.
 
 ## The 14 interactive visualizers
 
@@ -59,11 +63,12 @@ index.html        # shell (loads the scripts in order)
 css/style.css     # neon arcade theme + animations
 js/
 ├── util.js        # tiny DOM + animation helpers
-├── data.js        # the 14 topics: learn content + quizzes + badges
+├── markdown.js    # dependency-free markdown renderer + lesson loader (fetch + cache)
+├── data.js        # 14 topics: learn content, quizzes, notes, references, videos, lesson path
 ├── state.js       # XP / levels / stars / badges, saved to localStorage
 ├── quiz.js        # reusable quiz "boss" engine
 ├── games.js       # the 14 interactive visualizers (Games registry)
-└── app.js         # router, skill-tree map, level view, bootstrap
+└── app.js         # router (arcade + course + reader), views, bootstrap
 ```
 
 The content mirrors the markdown lessons under [`DSA`](DSA) and the runnable Java in

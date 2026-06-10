@@ -5,6 +5,20 @@ var TOPICS = [
   {
     id: 'complexity', n: 1, name: 'Big-O Basics', icon: '⏱️', color: '#2ce6e6',
     tag: 'How work grows with n', play: 'complexity',
+    lesson: 'DSA/01-foundations/01-time-and-space-complexity-java-examples.md',
+    notes: [
+      'Big-O is about the shape of growth, not a stopwatch. Two O(n) algorithms can differ 10× in real speed — Big-O only tells you how cost scales as n gets large, which is what dominates eventually.',
+      'Watch for hidden costs: calling list.contains() (O(n)) inside a loop is secretly O(n²); building a String with += in a loop is O(n²); a copy or substring inside a loop adds a factor of n.',
+    ],
+    references: [
+      { title: 'Big-O Cheat Sheet', url: 'https://www.bigocheatsheet.com/', kind: 'reference' },
+      { title: 'Asymptotic Analysis — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/analysis-of-algorithms-set-1-asymptotic-analysis/', kind: 'reference' },
+      { title: 'VisuAlgo — visualize algorithms', url: 'https://visualgo.net/en', kind: 'interactive' },
+    ],
+    videos: [
+      { title: 'Asymptotic Notation & Big-O (Algorithms playlist)', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+      { title: 'Data Structures & Algorithms — Full Course', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'Complexity describes how the number of operations (time) or extra memory (space) grows as input size n grows — not actual seconds.',
       bullets: [
@@ -25,6 +39,20 @@ var TOPICS = [
   {
     id: 'arrays', n: 2, name: 'Arrays', icon: '▦', color: '#7cff5b',
     tag: 'Two pointers & windows', play: 'array',
+    lesson: 'DSA/02-arrays/02-arrays-fundamentals-and-patterns.md',
+    notes: [
+      'The one superpower is O(1) random access from contiguous memory; the one weakness is O(n) insert/delete in the middle (everything shifts). Reach for arrays when you read by index far more than you reshuffle.',
+      'Most array interview tricks are one of three: two pointers (sorted / partition / reverse), sliding window (contiguous subarray), or a hash map to replace an inner lookup loop.',
+    ],
+    references: [
+      { title: 'Array Data Structure — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/array-data-structure/', kind: 'reference' },
+      { title: 'Two Pointers — LeetCode tag', url: 'https://leetcode.com/tag/two-pointers/', kind: 'practice' },
+      { title: 'java.util.ArrayList (Java 21 docs)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Arrays & Dynamic Arrays', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=arrays' },
+      { title: 'Data Structures — Full Course (arrays section)', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'A contiguous block giving O(1) random access. Fast to read anywhere, slow to insert/delete in the middle (shifting).',
       bullets: [
@@ -46,6 +74,20 @@ var TOPICS = [
   {
     id: 'strings', n: 3, name: 'Strings', icon: '✎', color: '#ffc34d',
     tag: 'Immutability & patterns', play: 'strings',
+    lesson: 'DSA/03-strings/03-strings-fundamentals-and-patterns.md',
+    notes: [
+      'Treat a String as a read-only array of chars. Because it is immutable, build incrementally with StringBuilder, and compare content with .equals (not ==, which compares references).',
+      'Char-frequency counts power anagram / permutation problems; sliding windows power "longest substring with some property" problems — both reuse the array patterns.',
+    ],
+    references: [
+      { title: 'String Data Structure — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/string-data-structure/', kind: 'reference' },
+      { title: 'String — LeetCode tag', url: 'https://leetcode.com/tag/string/', kind: 'practice' },
+      { title: 'java.lang.String (Java 21 docs)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Sliding Window playlist', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=sliding%20window' },
+      { title: 'Data Structures & Algorithms — Full Course', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'A String is an immutable char sequence. Every "edit" makes a new String — which drives the big performance traps.',
       bullets: [
@@ -67,6 +109,20 @@ var TOPICS = [
   {
     id: 'linkedlist', n: 4, name: 'Linked Lists', icon: '⛓', color: '#9d7bff',
     tag: 'Pointers, no shifting', play: 'linkedlist',
+    lesson: 'DSA/04-linked-lists/04-linked-lists-fundamentals-and-patterns.md',
+    notes: [
+      'Linked lists trade O(1) splicing for O(n) lookup and poor cache locality. In real Java you will almost always pick ArrayList / ArrayDeque — but the pointer-rewiring reasoning is gold for interviews and for understanding LRU caches and iterators.',
+      'Three patterns cover most problems: reverse (prev/cur/next), slow & fast pointers (middle, cycle, nth-from-end), and a dummy head node to simplify edge cases.',
+    ],
+    references: [
+      { title: 'Linked List — VisuAlgo (interactive)', url: 'https://visualgo.net/en/list', kind: 'interactive' },
+      { title: 'Linked List — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/data-structures/linked-list/', kind: 'reference' },
+      { title: 'Linked List — LeetCode tag', url: 'https://leetcode.com/tag/linked-list/', kind: 'practice' },
+    ],
+    videos: [
+      { title: 'Linked Lists (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Linked List — classic explainer', channel: 'mycodeschool', url: 'https://www.youtube.com/@mycodeschool/search?query=linked%20list' },
+    ],
     learn: {
       summary: 'Nodes scattered in memory, each pointing to the next. No O(1) index access, but O(1) insert/delete once you hold the spot.',
       bullets: [
@@ -88,6 +144,20 @@ var TOPICS = [
   {
     id: 'stack', n: 5, name: 'Stacks', icon: '🥞', color: '#ff4fd8',
     tag: 'LIFO — last in, first out', play: 'stack',
+    lesson: 'DSA/05-stack/05-stack-fundamentals-and-patterns.md',
+    notes: [
+      'Reach for a stack whenever the most-recent thing must be handled first: matching brackets/tags, undo, backtracking, and the call stack itself.',
+      'The "monotonic stack" (kept increasing or decreasing) answers next-greater / next-smaller and histogram problems in O(n).',
+    ],
+    references: [
+      { title: 'Stack Data Structure — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/stack-data-structure/', kind: 'reference' },
+      { title: 'Stack — LeetCode tag', url: 'https://leetcode.com/tag/stack/', kind: 'practice' },
+      { title: 'java.util.ArrayDeque (use as a stack)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayDeque.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Stack (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Stack & monotonic-stack problems', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=stack' },
+    ],
     learn: {
       summary: 'Last-in, first-out. Only the top is accessible. push/pop/peek are all O(1).',
       bullets: [
@@ -109,6 +179,20 @@ var TOPICS = [
   {
     id: 'queue', n: 6, name: 'Queues', icon: '🎟️', color: '#2ce6e6',
     tag: 'FIFO — first in, first out', play: 'queue',
+    lesson: 'DSA/06-queue/06-queue-fundamentals-and-patterns.md',
+    notes: [
+      'A queue is the engine of BFS and of every work/task pipeline. A circular buffer keeps both ends O(1) (no shifting).',
+      'A deque (double-ended queue, ArrayDeque) generalizes both stack and queue and powers sliding-window-maximum.',
+    ],
+    references: [
+      { title: 'Queue Data Structure — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/queue-data-structure/', kind: 'reference' },
+      { title: 'Queue — LeetCode tag', url: 'https://leetcode.com/tag/queue/', kind: 'practice' },
+      { title: 'java.util.ArrayDeque (Java 21 docs)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayDeque.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Queue (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Data Structures & Algorithms — Full Course', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'First-in, first-out. Add at the back, remove from the front. The engine behind BFS and work queues.',
       bullets: [
@@ -129,6 +213,20 @@ var TOPICS = [
   {
     id: 'hashing', n: 7, name: 'Hashing', icon: '#️⃣', color: '#7cff5b',
     tag: 'O(1) average lookup', play: 'hashing',
+    lesson: 'DSA/07-hashing/07-hashing-fundamentals-and-patterns.md',
+    notes: [
+      'Hashing is the "have I seen this?" / "what maps to this key?" superpower at average O(1). It trades memory for speed and gives up ordering.',
+      'Correctness rule: if you override equals you MUST override hashCode, and keys should be effectively immutable — otherwise entries seem to vanish from the map.',
+    ],
+    references: [
+      { title: 'Hash Table — VisuAlgo (interactive)', url: 'https://visualgo.net/en/hashtable', kind: 'interactive' },
+      { title: 'Hashing — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/hashing-data-structure/', kind: 'reference' },
+      { title: 'java.util.HashMap (Java 21 docs)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/HashMap.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Hash Tables (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Hash map interview patterns', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=hash%20map' },
+    ],
     learn: {
       summary: 'Map a key to a bucket via a hash function for average O(1) put/get. Collisions chain in a bucket; a high load factor triggers resize.',
       bullets: [
@@ -149,6 +247,20 @@ var TOPICS = [
   {
     id: 'recursion', n: 8, name: 'Recursion', icon: '🌀', color: '#ffc34d',
     tag: 'A method calling itself', play: 'recursion',
+    lesson: 'DSA/08-recursion/08-recursion-fundamentals-and-patterns.md',
+    notes: [
+      'Define the base case and make every recursive call move toward it. Each call costs a stack frame, so depth = O(extra space) and very deep recursion can StackOverflow (Java has no tail-call optimization).',
+      'When a recursion recomputes the same inputs (e.g. naive Fibonacci, O(2ⁿ)), add a cache — that single step is the gateway to dynamic programming.',
+    ],
+    references: [
+      { title: 'Recursion — VisuAlgo (interactive)', url: 'https://visualgo.net/en/recursion', kind: 'interactive' },
+      { title: 'Recursion — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/recursion/', kind: 'reference' },
+      { title: 'Recursion / Backtracking — LeetCode tag', url: 'https://leetcode.com/tag/backtracking/', kind: 'practice' },
+    ],
+    videos: [
+      { title: 'Recursion & Backtracking (Algorithms playlist)', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+      { title: 'Recursion for beginners', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'Solve a problem via smaller instances of itself. Needs a base case (stops) and a recursive case (shrinks toward it).',
       bullets: [
@@ -170,6 +282,20 @@ var TOPICS = [
   {
     id: 'sorting', n: 9, name: 'Sorting', icon: '📊', color: '#9d7bff',
     tag: 'Order from chaos', play: 'sorting',
+    lesson: 'DSA/09-sorting/09-sorting-fundamentals-and-patterns.md',
+    notes: [
+      'You will rarely hand-write a sort, but knowing them explains the library: primitives use dual-pivot quicksort, objects use stable TimSort. "Stable" matters when sorting by a secondary key.',
+      'Comparison sorts cannot beat O(n log n). If you only need the top-k or a min, a heap or quickselect beats a full sort.',
+    ],
+    references: [
+      { title: 'Sorting — VisuAlgo (interactive)', url: 'https://visualgo.net/en/sorting', kind: 'interactive' },
+      { title: 'Sorting Algorithms — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/sorting-algorithms/', kind: 'reference' },
+      { title: 'Big-O Cheat Sheet (sorting table)', url: 'https://www.bigocheatsheet.com/', kind: 'reference' },
+    ],
+    videos: [
+      { title: 'Sorting Algorithms (Algorithms playlist)', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+      { title: 'Data Structures & Algorithms — Full Course', channel: 'freeCodeCamp', url: 'https://www.youtube.com/watch?v=RBSGKlAvoiM' },
+    ],
     learn: {
       summary: 'Arrange elements in order. O(n²) simple sorts vs O(n log n) divide-and-conquer sorts. Comparison sorts can\'t beat Ω(n log n).',
       bullets: [
@@ -190,6 +316,20 @@ var TOPICS = [
   {
     id: 'searching', n: 10, name: 'Searching', icon: '🔍', color: '#2ce6e6',
     tag: 'Find it fast', play: 'searching',
+    lesson: 'DSA/10-searching/10-searching-fundamentals-and-patterns.md',
+    notes: [
+      'Binary search is the payoff for keeping data sorted: O(log n) instead of O(n). Watch the three traps — overflow in mid, the loop bound, and which duplicate you want (first vs last).',
+      'The deeper skill is "binary search on the answer": when a predicate flips false→true at some threshold, you can binary-search the value space even without an array.',
+    ],
+    references: [
+      { title: 'Searching Algorithms — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/searching-algorithms/', kind: 'reference' },
+      { title: 'Binary Search — LeetCode tag', url: 'https://leetcode.com/tag/binary-search/', kind: 'practice' },
+      { title: 'Big-O Cheat Sheet', url: 'https://www.bigocheatsheet.com/', kind: 'reference' },
+    ],
+    videos: [
+      { title: 'Binary Search & Searching (Algorithms playlist)', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+      { title: 'Binary search patterns', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=binary%20search' },
+    ],
     learn: {
       summary: 'Unsorted data → linear O(n) scan. Sorted data → binary search O(log n) by halving the range each step.',
       bullets: [
@@ -211,6 +351,20 @@ var TOPICS = [
   {
     id: 'trees', n: 11, name: 'Trees', icon: '🌳', color: '#7cff5b',
     tag: 'Hierarchies & traversals', play: 'trees',
+    lesson: 'DSA/11-trees/11-trees-fundamentals-and-patterns.md',
+    notes: [
+      'A tree is defined recursively, so most tree code is a few lines of recursion. Pick the traversal for the job: in-order = sorted (for a BST), post-order = compute-from-children, level-order (BFS) = by depth.',
+      'Tree height drives both cost and recursion depth; a skewed tree degrades to a list. Real ordered structures stay balanced (red-black).',
+    ],
+    references: [
+      { title: 'Binary Tree — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/binary-tree-data-structure/', kind: 'reference' },
+      { title: 'Tree traversal — VisuAlgo (interactive)', url: 'https://visualgo.net/en/bst', kind: 'interactive' },
+      { title: 'Tree — LeetCode tag', url: 'https://leetcode.com/tag/tree/', kind: 'practice' },
+    ],
+    videos: [
+      { title: 'Trees (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Tree traversals & problems', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=binary%20tree' },
+    ],
     learn: {
       summary: 'Nodes with up to two children, defined recursively. Traversed depth-first (pre/in/post) or breadth-first (level-order).',
       bullets: [
@@ -231,6 +385,20 @@ var TOPICS = [
   {
     id: 'bst', n: 12, name: 'Binary Search Trees', icon: '🔺', color: '#ff4fd8',
     tag: 'Ordered, searchable tree', play: 'bst',
+    lesson: 'DSA/12-bst/12-bst-fundamentals-and-patterns.md',
+    notes: [
+      'The left<node<right invariant turns a tree into binary search with O(log n) insert/delete too — but only while balanced. Inserting sorted data into a plain BST degenerates it to O(n).',
+      'In production use TreeMap / TreeSet (self-balancing). Reach for them over a HashMap when you need ordered iteration or floor / ceiling / range queries.',
+    ],
+    references: [
+      { title: 'BST — VisuAlgo (interactive)', url: 'https://visualgo.net/en/bst', kind: 'interactive' },
+      { title: 'Binary Search Tree — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/binary-search-tree-data-structure/', kind: 'reference' },
+      { title: 'java.util.TreeMap (Java 21 docs)', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html', kind: 'docs' },
+    ],
+    videos: [
+      { title: 'Binary Search Trees (Data Structures playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'BST insert / delete / search', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=binary%20search%20tree' },
+    ],
     learn: {
       summary: 'A binary tree where left subtree < node < right subtree. Search/insert/delete are O(h) — O(log n) when balanced.',
       bullets: [
@@ -251,6 +419,20 @@ var TOPICS = [
   {
     id: 'graphs', n: 13, name: 'Graphs', icon: '🕸️', color: '#9d7bff',
     tag: 'Vertices & edges', play: 'graphs',
+    lesson: 'DSA/13-graphs/13-graphs-fundamentals-and-patterns.md',
+    notes: [
+      'Graphs are the general case — trees are just acyclic graphs. Adjacency lists (O(V+E) memory) are the default. The visited set is mandatory or cycles loop forever.',
+      'BFS = shortest path in an UNWEIGHTED graph and level-by-level work; DFS = reachability, cycle detection, topological sort. Weighted shortest path needs Dijkstra.',
+    ],
+    references: [
+      { title: 'Graph traversal — VisuAlgo (interactive)', url: 'https://visualgo.net/en/graphds', kind: 'interactive' },
+      { title: 'Graph Data Structure — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/', kind: 'reference' },
+      { title: 'Graph — LeetCode tag', url: 'https://leetcode.com/tag/graph/', kind: 'practice' },
+    ],
+    videos: [
+      { title: 'Graph Theory (Algorithms playlist)', channel: 'William Fiset', url: 'https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu' },
+      { title: 'Graphs (BFS/DFS) — Algorithms playlist', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+    ],
     learn: {
       summary: 'Vertices connected by edges (directed/undirected, weighted/not). Traversed with BFS or DFS plus a visited set.',
       bullets: [
@@ -271,6 +453,20 @@ var TOPICS = [
   {
     id: 'dp', n: 14, name: 'Dynamic Programming', icon: '🧩', color: '#ffc34d',
     tag: 'Reuse subproblem answers', play: 'dp',
+    lesson: 'DSA/14-dynamic-programming/14-dynamic-programming-fundamentals-and-patterns.md',
+    notes: [
+      'DP applies when subproblems overlap and the optimum is built from sub-optima. The hard part is defining the state and recurrence — the code is short once you have them.',
+      'Top-down = recursion + cache (memoization); bottom-up = fill a table. Greedy is simpler but can be wrong (coin change {1,3,4}, amount 6).',
+    ],
+    references: [
+      { title: 'Dynamic Programming — GeeksforGeeks', url: 'https://www.geeksforgeeks.org/dynamic-programming/', kind: 'reference' },
+      { title: 'DP — LeetCode tag', url: 'https://leetcode.com/tag/dynamic-programming/', kind: 'practice' },
+      { title: 'NeetCode roadmap (DP section)', url: 'https://neetcode.io/roadmap', kind: 'reference' },
+    ],
+    videos: [
+      { title: 'Dynamic Programming (Algorithms playlist)', channel: 'Abdul Bari', url: 'https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O' },
+      { title: 'DP for beginners + patterns', channel: 'NeetCode', url: 'https://www.youtube.com/@NeetCode/search?query=dynamic%20programming' },
+    ],
     learn: {
       summary: 'Break a problem into overlapping subproblems with optimal substructure, solve each once, and reuse — top-down (memo) or bottom-up (table).',
       bullets: [

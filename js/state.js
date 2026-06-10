@@ -35,9 +35,10 @@ function topicIndex(id) { return TOPICS.findIndex((t) => t.id === id); }
 
 function isCompleted(id) { return State.scores[id] != null; }
 
+// Level locking is disabled — every level is freely accessible. Stars/XP/badges
+// remain as optional achievements. (Kept as a function so callers stay unchanged.)
 function isUnlocked(index) {
-  if (index <= 0) return true;
-  return isCompleted(TOPICS[index - 1].id);
+  return true;
 }
 
 function starsFor(percent) {

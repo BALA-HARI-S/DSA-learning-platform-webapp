@@ -20,9 +20,10 @@ Lesson template: [DSA/LESSON-TEMPLATE.md](DSA/LESSON-TEMPLATE.md)
 Lessons now ship with **runnable Java + JUnit tests** under [code/](code/README.md).
 Run them all with `cd code && mvn test`.
 
-Prefer to learn by playing? Open the **[AlgoArcade web app](webapp/README.md)** — a
-game-like, interactive tour of all 14 topics (skill-tree, visualizers, quizzes, XP/badges).
-Just open `webapp/index.html` in a browser.
+Prefer to learn by playing? Open the **[AlgoArcade web app](README.md)** — a
+game-like, interactive tour of all 14 topics (skill-tree, visualizers, quizzes, XP/badges)
+*with a built-in reader for these very lessons*. Just open `index.html` (via GitHub Pages
+or a local server).
 
 Lesson notes:
 
